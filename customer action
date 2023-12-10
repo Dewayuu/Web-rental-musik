@@ -1,0 +1,32 @@
+<?php
+
+if ($_GET['action']=='add'){                
+    $id=$_GET['id'];
+    $nama=$_GET['nama'];
+    $alamat=$_GET['alamat'];
+    $email=$_GET['email'];
+    $query="insert into pembeli values(".$id.",'".$nama."','".$alamat."','".$email."');";
+    //echo $query;
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+
+}
+else if ($_GET['action']=='edit'){
+    $id=$_GET['id'];
+    $nama=$_GET['nama'];
+    $alamat=$_GET['alamat'];
+    $email=$_GET['email'];
+    $query="update pembeli set nama_pembeli='".$nama."', alamat_pembeli='".$alamat."', email_pembeli='".$email."' where id_pembeli=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+else if ($_GET['action']=='delete'){
+    $id=$_GET['id_pembeli'];
+    $query="delete from pembeli where id_pembeli=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+
+header('Location: customer.php');
+exit();
+?>
