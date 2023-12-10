@@ -5,39 +5,27 @@ if ($_GET['action'] == 'add') {
     $namaproduk = $_GET['nama_produk'];
     $harga = $_GET['harga'];
     $stok = $_GET['stok'];
+    $query="insert into produk values(".$id.",'".$namaproduk."','".$harga."','".$stok."');";
 
-    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
 
-    // Use prepared statement to avoid SQL injection
-    $query = $mysqli->prepare("INSERT INTO produk (id_produk, nama_produk, harga, stok) VALUES (?, ?, ?, ?)");
-    $query->bind_param("isss", $id, $namaproduk, $harga, $stok);
-    $query->execute();
-    $query->close();
 } else if ($_GET['action'] == 'edit') {
     $id = $_GET['id'];
     $namaproduk = $_GET['nama_produk'];
     $harga = $_GET['harga'];
     $stok = $_GET['stok'];
+    $query="update produk set nama_produk='".$namaproduk."', harga='".$harga."', stok='".$stok."' where id_produk=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
 
-    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
-
-    // Use prepared statement to avoid SQL injection
-    $query = $mysqli->prepare("UPDATE produk SET nama_produk=?, harga=? WHERE id_produk=?");
-    $query->bind_param("ssi", $nama, $harga, $id);
-    $query->execute();
-    $query->close();
 } else if ($_GET['action'] == 'delete') {
     $id = $_GET['id_produk'];
-
-    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
-
-    // Use prepared statement to avoid SQL injection
-    $query = $mysqli->prepare("DELETE FROM produk WHERE id_produk=?");
-    $query->bind_param("i", $id);
-    $query->execute();
-    $query->close();
+    $query="delete from produk where id_produk=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
 }
 
-header('Location: index.php?page=produk');
+header('Location: produk.php');
 exit();
 ?>
