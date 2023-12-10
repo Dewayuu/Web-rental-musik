@@ -1,0 +1,51 @@
+<?php
+    $action=$_GET['action'];
+    
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+      if ($_GET['action']=="add"){
+        $result = $mysqli->query("SELECT MAX(id_pembeli) AS currentid FROM pembeli;");
+
+        $row = $result->fetch_assoc(); //khusus single result
+        $currentid=$row['currentid']+1; //tambahkan dengan 1 untuk id baru
+        $nama="";
+        $alamat="";
+        $email="";
+      }
+      else if ($_GET['action']=="edit"){
+        $currentid=$_GET['id_pembeli'];
+        $query="SELECT * from pembeli where id_pembeli=".$currentid.";";
+        //print_r($query);
+        $result = $mysqli->query($query);
+        $row = $result->fetch_assoc(); //khusus single result
+        //print_r($row);
+        $nama=$row['nama_pembeli'];
+        $alamat=$row['alamat_pembeli'];
+        $email=$row['email_pembeli'];
+
+      }
+    
+  ?>
+  <div class="col" style="padding-top: 20px;">
+  <form action="customer.action.php">
+    <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="text" class="form-control" name="id" id="id" placeholder="ID" value="<?php echo $currentid;?>">
+    </div>
+    <div class="mb-3">
+      <label for="nama" class="form-label">Nama</label>
+      <input type="text" class="form-control" name="nama" id="nama" placeholder="tuliskan nama di sini" value="<?php echo $nama;?>">
+    </div>
+    <div class="mb-3">
+      <label for="alamat" class="form-label">Alamat</label>
+      <input type="text" class="form-control" name="alamat" id="alamat" placeholder="tuliskan alamat di sini" value="<?php echo $alamat;?>">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" class="form-control" name="email" id="email" placeholder="tuliskan email di sini" value="<?php echo $email;?>">
+    </div>
+    <input type="hidden" name="action" value="<?php echo $action;?>">
+    <div class="d-grid gap-2 p-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-primary" type="submit">Simpan</button>
+    </div>
+  </form>
+	</div>
