@@ -1,9 +1,9 @@
-    <div class="d-grid gap-2 p-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary me-md-2" href="index.php?page=produk.form&action=add" role="button">Tambah</a>
+<div class="d-grid gap-2 p-2 d-md-flex justify-content-md-end">
+      <a class="btn btn-primary me-md-2" href="produk.form.php?&action=add" role="button">Tambah</a>
     </div>
     
     <?php 
-      $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+      $mysqli = new mysqli("localhost", "root", "", "db_rental");
       $result = $mysqli->query("SELECT * from produk");
     ?>
     <table class="table table-striped">
@@ -30,7 +30,7 @@ foreach ($result as $row) {
     echo $row['stok'];
     echo "</td>";
     echo "<td>";
-    echo "<a class='btn btn-primary me-md-2 btn-sm' href='index.php?page=produk.form&id_produk=".$row['id_produk']."&action=edit'>Edit</a>";
+    echo "<a class='btn btn-primary me-md-2 btn-sm' href='produk.form.php?&id_produk=".$row['id_produk']."&action=edit'>Edit</a>";
     echo "<a class='btn btn-danger me-md-2 btn-sm' href='produk.action.php?id_produk=".$row['id_produk']."&action=delete'>Delete</a>";
     echo "</td>";
     echo "</tr>";
@@ -38,5 +38,4 @@ foreach ($result as $row) {
 ?>
 
     </table>
-
 
