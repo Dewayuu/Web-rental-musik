@@ -1,0 +1,44 @@
+<?php
+$action = $_GET['action'];
+
+$mysqli = new mysqli("localhost", "root", "", "alatmusik");
+if ($_GET['action'] == "add") {
+    $result = $mysqli->query("SELECT MAX(id_penjualan) AS currentid FROM penjualan;");
+
+    $row = $result->fetch_assoc();
+    $currentid = $row['currentid'] + 1;
+    $idpenjualan = "";
+    $idcustomer = "";
+    $tanggalpenjualan = "";
+} else if ($_GET['action'] == "edit") {
+    $currentid = $_GET['id_penjualan'];
+    $query = "SELECT * from penjualan where id_penjualan=" . $currentid . ";";
+    $result = $mysqli->query($query);
+    $row = $result->fetch_assoc();
+    $idpenjualan = $row['id_penjualan'];
+    $idcustomer = $row['id_customer'];
+    $tanggalpenjualan = $row['taggal_penjualan']; // Add the missing semicolon here
+}
+?>
+<div class="col" style="padding-top: 20px;">
+    <form action="penjualan.action.php" method="post"> <!-- Make sure to specify the method as POST -->
+        <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" class="form-control" name="id" id="id" placeholder="ID" value="<?php echo $currentid; ?>">
+        </div>
+        <div class="mb-3">
+            <label for="nama" class="form-label">ID Customer</label>
+            <input type="text" class="form-control" name="id" id="id" placeholder="tuliskan id di sini"
+                value="<?php echo $idcustomer; ?>">
+        </div>
+        <div class="mb-3">
+            <label for="harga" class="form-label">Tanggal Penjualan</label>
+            <input type="text" class="form-control" name="tanggal_penjualan" id="tanggal_penjualan" placeholder="tuliskan tanggal di sini"
+                value="<?php echo $harga; ?>">
+        </div>
+        <input type="hidden" name="action" value="<?php echo $action; ?>">
+        <div class="d-grid gap-2 p-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary" type="submit">Simpan</button>
+        </div>
+    </form>
+</div>
