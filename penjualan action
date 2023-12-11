@@ -1,0 +1,42 @@
+<?php
+
+if ($_GET['action'] == 'add') {
+    $id = $_GET['id'];
+    $idpenjualan = $_GET['id_penjualan'];
+    $idcustomer = $_GET['id_customer'];
+    $tanggalpenjualan = $_GET['tanggal_penjualan'];
+
+    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+
+    // Use prepared statement to avoid SQL injection
+    $query = $mysqli->prepare("INSERT INTO penjualan (id_penjualan, id_customer, tanggal_penjualan) VALUES (?, ?, ?, ?)");
+    $query->bind_param("isss", $idpenjualan, $idcustomer, $tanggalpenjualan);
+    $query->execute();
+    $query->close();
+} else if ($_GET['action'] == 'edit') {
+    $idpenjualan = $_GET['id_penjualan'];
+    $idcustomer = $_GET['id_customer'];
+    $tanggalpenjualan = $_GET['tanggal_penjualan'];
+
+    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+
+    // Use prepared statement to avoid SQL injection
+    $query = $mysqli->prepare("UPDATE penjualan SET id_customer=?, tanggal_penjualan=? WHERE id_penjualan=?");
+    $query->bind_param("ssi", $idcustomer, $tanggalpenjualan, $idpenjualan);
+    $query->execute();
+    $query->close();
+} else if ($_GET['action'] == 'delete') {
+    $id = $_GET['id_penjualan'];
+
+    $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+
+    // Use prepared statement to avoid SQL injection
+    $query = $mysqli->prepare("DELETE FROM penjualan WHERE id_penjualan=?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $query->close();
+}
+
+header('Location: penjualan.php');
+exit();
+?>
