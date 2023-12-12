@@ -1,0 +1,32 @@
+<?php
+
+if ($_GET['action']=='add'){                
+    $id=$_GET['id'];
+    $namapegawai=$_GET['nama'];
+    $alamatpegawai=$_GET['alamat'];
+    $emailpegawai=$_GET['email'];
+    $query="insert into pegawai values(".$id.",'".$namapegawai."','".$alamatpegawai."','".$emailpegawai."');";
+    //echo $query;
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+
+}
+else if ($_GET['action']=='edit'){
+    $id=$_GET['id'];
+    $namapegawai=$_GET['nama'];
+    $alamatpegawai=$_GET['alamat'];
+    $emailpegawai=$_GET['email'];
+    $query="update pegawai set nama_pegawai='".$namapegawai."', alamat_pegawai='".$alamatpegawai."', email_pegawai='".$emailpegawai."' where id_pegawai=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+else if ($_GET['action']=='delete'){
+    $id=$_GET['id_pegawai'];
+    $query="delete from pegawai where id_pegawai=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+
+header('Location: pegawai.php');
+exit();
+?>
