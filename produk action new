@@ -1,0 +1,32 @@
+<?php
+
+if ($_GET['action']=='add'){                
+    $id=$_GET['id'];
+    $nama=$_GET['nama'];
+    $harga=$_GET['harga'];
+    $stok=$_GET['stok'];
+    $query="insert into produk values(".$id.",'".$nama."','".$harga."','".$stok."');";
+    //echo $query;
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+
+}
+else if ($_GET['action']=='edit'){
+    $id=$_GET['id'];
+    $nama=$_GET['nama'];
+    $harga=$_GET['harga'];
+    $stok=$_GET['stok'];
+    $query="update produk set nama_produk='".$nama."', harga='".$harga."', stok='".$stok."' where id_produk=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+else if ($_GET['action']=='delete'){
+    $id=$_GET['id_produk'];
+    $query="delete from produk where id_produk=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+
+header('Location: produk.php');
+exit();
+?>
