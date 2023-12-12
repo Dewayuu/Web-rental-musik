@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEGAWAI</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+        integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
+        crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container mt-4">
+            <div class="d-flex justify-content-end">
+            <a class="btn btn-primary" href="formpegawai.php?&action=add" role="button">Tambah</a>
+        </div>
+            <?php 
+            $mysqli = new mysqli("localhost", "root", "", "db_rental");
+            $result = $mysqli->query("SELECT * from pegawai");
+            ?>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID PEGAWAI</th>
+                        <th scope="col">NAMA PEGAWAI</th>
+                        <th scope="col">ALAMAT PEGAWAI</th>
+                        <th scope="col">E-MAIL PEGAWAI</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>  
+                <tbody>
+                    <?php foreach ($result as $row) : ?>
+                    <tr>
+                        <th scope="row"><?= $row['id_pegawai']; ?></th>
+                        <td><?= $row['nama_pegawai']; ?></td>
+                        <td><?= $row['alamat_pegawai']; ?></td>
+                        <td><?= $row['email_pegawai']; ?></td>
+                        <td>
+                            <a class='btn btn-primary btn-sm' href='formpegawai.php?&id_pegawai=<?= $row['id_pegawai']; ?>&action=edit'>Edit</a>
+                            <a class='btn btn-danger btn-sm' href='pegawai.action.php?id_pegawai=<?= $row['id_pegawai']; ?>&action=delete'>Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <a href="db.php" class="btn btn-dark mx-auto" style="display: block;" tabindex="-1" role="button" aria-disabled="false">Back</a>
+
+    <!-- Bootstrap JS and Popper.js (Optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"
+    integrity="sha384-ZmpKk4I4OnUn1yZIn11bA6rhdYH0ueZbbYl5VA+38Al5i5QZIezZDO/N9a9Q6e9B"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyDFF6fD6Z/iPZZAsKgDWr+YX0GEZl5BCb"
+    crossorigin="anonymous"></script>
+</body>
+</html>
