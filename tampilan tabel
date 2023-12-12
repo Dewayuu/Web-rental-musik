@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRODUK</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
+    crossorigin="anonymous">
+</head>
+<body>
+
+
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-primary" href="produk.form.php?&action=add" role="button">Tambah</a>
+    </div>
+
+
+    
+    <?php 
+        $mysqli = new mysqli("localhost", "root", "", "alatmusik");
+        $result = $mysqli->query("SELECT * from produk");
+    ?>
+
+
+
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID PRODUK</th>
+                <th scope="col">NAMA PRODUK</th>
+                <th scope="col">HARGA</th>
+                <th scope="col">STOK</th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>  
+        <tbody>
+            <?php foreach ($result as $row) : ?>
+                <tr>
+                    <th scope="row"><?= $row['id_produk']; ?></th>
+                    <td><?= $row['nama_produk']; ?></td>
+                    <td><?= $row['harga']; ?></td>
+                    <td><?= $row['stok']; ?></td>
+                    <td>
+                        <a class='btn btn-primary btn-sm' href='produk.form.php?&id_produk=<?= $row['id_produk']; ?>&action=edit'>Edit</a>
+                        <a class='btn btn-danger btn-sm' href='produk.action.php?id_produk=<?= $row['id_produk']; ?>&action=delete'>Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS and Popper.js (Optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"
+    integrity="sha384-ZmpKk4I4OnUn1yZIn11bA6rhdYH0ueZbbYl5VA+38Al5i5QZIezZDO/N9a9Q6e9B"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyDFF6fD6Z/iPZZAsKgDWr+YX0GEZl5BCb"
+    crossorigin="anonymous"></script>
+</body>
+</html>
