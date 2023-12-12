@@ -1,0 +1,70 @@
+<!-- <!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rental Musik</title>
+        <link rel="stylesheet" href="style1.css">
+    </head>
+    <body>
+        <div class="table-responsive"> -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUSTOMER</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+        integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
+        crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container mt-4">
+            <div class="d-flex justify-content-end">
+            <a class="btn btn-primary" href="formcustomer.php?&action=add" role="button">Tambah</a>
+        </div>
+            <?php 
+            $mysqli = new mysqli("localhost", "root", "", "db_rental");
+            $result = $mysqli->query("SELECT * from customer");
+            ?>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID CUSTOMER</th>
+                        <th scope="col">NAMA CUSTOMER</th>
+                        <th scope="col">ALAMAT</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>  
+                <tbody>
+                    <?php foreach ($result as $row) : ?>
+                    <tr>
+                        <th scope="row"><?= $row['id_customer']; ?></th>
+                        <td><?= $row['nama_customer']; ?></td>
+                        <td><?= $row['alamat_customer']; ?></td>
+                        <td><?= $row['email_customer']; ?></td>
+                        <td>
+                            <a class='btn btn-primary btn-sm' href='formcustomer.php?&id_customer=<?= $row['id_customer']; ?>&action=edit'>Edit</a>
+                            <a class='btn btn-danger btn-sm' href='customer.action.php?id_customer=<?= $row['id_customer']; ?>&action=delete'>Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <a href="db.php" class="btn btn-dark mx-auto" style="display: block;" tabindex="-1" role="button" aria-disabled="false">Back</a>
+
+    <!-- Bootstrap JS and Popper.js (Optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"
+    integrity="sha384-ZmpKk4I4OnUn1yZIn11bA6rhdYH0ueZbbYl5VA+38Al5i5QZIezZDO/N9a9Q6e9B"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyDFF6fD6Z/iPZZAsKgDWr+YX0GEZl5BCb"
+    crossorigin="anonymous"></script>
+</body>
+</html>
