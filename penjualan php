@@ -35,7 +35,7 @@
     </head>
     <body>
     <div class="container mt-4">
-        <h2 class="text-center mb-4 fixed-header">DAFTAR CUSTOMER</h2>
+        <h2 class="text-center mb-4 fixed-header">DAFTAR PENJUALAN</h2>
         <div class="d-flex justify-content-end">
             <a href="db.php" class="btn btn-dark btn-sm fixed-buttons" tabindex="-1" role="button" aria-disabled="false">Back</a>
         </div>
