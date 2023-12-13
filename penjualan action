@@ -1,0 +1,30 @@
+<?php
+
+if ($_GET['action']=='add'){                
+    $id=$_GET['id'];
+    $idcust=$_GET['idcust'];
+    $tanggal=$_GET['tanggal'];
+    $query="insert into penjualan values(".$id.",'".$idcust."','".$tanggal."');";
+    //echo $query;
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+
+}
+else if ($_GET['action']=='edit'){
+    $id=$_GET['id'];
+    $idcust=$_GET['idcust'];
+    $tanggal=$_GET['tanggal'];
+    $query="update penjualan set id_customer='".$idcust."', tanggal_penjualan='".$tanggal."' where id_penjualan=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+else if ($_GET['action']=='delete'){
+    $id=$_GET['id_penjualan'];
+    $query="delete from penjualan where id_penjualan=".$id.";";
+    $mysqli = new mysqli("localhost", "root", "", "db_rental");
+    $mysqli->query($query);
+}
+
+header('Location: penjualan.php');
+exit();
+?>
