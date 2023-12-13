@@ -21,12 +21,37 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
         integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
         crossorigin="anonymous">
+
+    <style>
+        /* CSS untuk membuat judul tabel tetap di atas saat di-scroll */
+        .fixed-header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background-color: #000; /* Warna latar belakang judul tabel (hitam) */
+        color: #fff; /* Warna teks judul tabel (putih) */
+        z-index: 1000; /* Untuk menempatkan di atas elemen-elemen lain */
+        padding: 10px; /* Padding untuk memberikan ruang di sekitar teks */
+    }
+
+     .fixed-buttons {
+            position: -webkit-sticky;
+            position: sticky;
+            bottom: 0;
+            background-color: #000; /* Warna latar belakang tombol (hitam) */
+            color: #fff; /* Warna teks tombol (putih) */
+            z-index: 1000; /* Untuk menempatkan di atas elemen-elemen lain */
+            padding: 10px; /* Padding untuk memberikan ruang di sekitar tombol */
+    }
+    </style>
     </head>
     <body>
-        <div class="container mt-4">
-            <div class="d-flex justify-content-end">
-            <a class="btn btn-primary" href="formcustomer.php?&action=add" role="button">Tambah</a>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4 fixed-header">DAFTAR CUSTOMER</h2>
+        <div class="d-flex justify-content-end">
+            <a href="db.php" class="btn btn-dark btn-sm fixed-buttons" tabindex="-1" role="button" aria-disabled="false">Back</a>
         </div>
+        <br>
             <?php 
             $mysqli = new mysqli("localhost", "root", "", "db_rental");
             $result = $mysqli->query("SELECT * from customer");
@@ -56,8 +81,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <br>
+        <a class="btn btn-primary" href="formcustomer.php?&action=add" style="display: block;" role="button">Tambah</a>
     </div>
-    <a href="db.php" class="btn btn-dark mx-auto" style="display: block;" tabindex="-1" role="button" aria-disabled="false">Back</a>
 
     <!-- Bootstrap JS and Popper.js (Optional) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"
